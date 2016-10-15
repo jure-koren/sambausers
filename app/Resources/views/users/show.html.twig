@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <hr>
+    <a class="btn btn-default" href="{{path('users_list')}}">Back to All Users</a>    
+        
+    <h1 class='page-header'>User Details</h1>
+
+
+        
+        <ul class="list-group">
+            <li class="list-group-item">Username: <strong>{{user.username}}</strong></li>
+            <li class="list-group-item">Full Name: <strong>{{user.name}}</strong></li>
+            <li class="list-group-item">Primary Group: <strong>{{user.primaryGroupId}}</strong></li>
+            <li class="list-group-item">UID: <strong>{{user.uid}}</strong></li>
+            <li class="list-group-item">Home Folder: <strong>{{user.homeFolder}}</strong></li>
+            <li class="list-group-item">Shell: <strong>{{user.shell}}</strong></li>                        
+            <li class="list-group-item">Description: <strong>{{user.description}}</strong></li>
+            
+            <li class="list-group-item">Groups: 
+                {% for group in user.groups %}
+                        <strong>
+                            &#9755;<a href="{{path('groups_show', { 'name': group.name })}}">
+                                {{group.name}}
+                            </a>
+                        </strong>
+                {% endfor %}            
+            </li>
+        </ul>
+       
+    <hr>
+    <a class="btn btn-danger" href="{{ path('users_delete', { 'username': user.username }) }}">Delete User</a>        
+    
+
+{% endblock %}

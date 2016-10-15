@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <hr>
+    <a class="btn btn-default" href="{{path('groups_list')}}">Back to All Groups</a>    
+        
+    <h1 class='page-header'>Group Details</h1>
+    
+        <ul class="list-group">
+            <li class="list-group-item">Name: <strong>{{group.name}}</strong></li>
+            <li class="list-group-item">GID: <strong>{{group.gid}}</strong></li>
+            <li class="list-group-item">Description: <strong>{{group.description}}</strong></li>
+        </ul>        
+
+    <hr>
+    <a class="btn btn-danger" href="{{ path('groups_delete', { 'name': group.name }) }}">Delete Group</a> 
+
+        
+    <h1 class='page-header'>Group Members</h1>
+    
+        <ul class="list-group">
+        {% for user in group.members %}
+           <li class="list-group-item">
+            <a href="{{path('users_show', { 'username': user.username })}}">
+                {{user.username}}
+            </a>
+           </li>
+        {% endfor %}
+        </ul>
+        
+
+
+
+{% endblock %}
